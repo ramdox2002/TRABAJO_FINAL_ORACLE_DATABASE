@@ -1,6 +1,6 @@
 import sqlite3
 
-import cx_Oracle
+# import cx_Oracle
 
 DEBUG_ORACLE = False
 
@@ -17,14 +17,15 @@ class CoolBox:
     def databaseCreationOrConnection(self):
         if DEBUG_ORACLE == True:
             # Credenciales de conexión
-            dsn = cx_Oracle.makedsn("host", "port", service_name="service_name")
-            username = "tu_usuario"
-            password = "tu_contraseña"
+            # dsn = cx_Oracle.makedsn("host", "port", service_name="service_name")
+            # username = "tu_usuario"
+            # password = "tu_contraseña"
 
             # Crear una conexión
-            conn = cx_Oracle.connect(username, password, dsn)            
-            cursor = conn.cursor()
-            return conn, cursor
+            # conn = cx_Oracle.connect(username, password, dsn)            
+            # cursor = conn.cursor()
+            # return conn, cursor
+            pass
         else:
             conn = sqlite3.connect(f"{self.name}.db")
             cursor = conn.cursor()

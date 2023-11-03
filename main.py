@@ -1,5 +1,11 @@
 import sqlite3
 
+import cx_Oracle
+
+DEBUG_ORACLE = False
+
+
+
 class CoolBox:
     def __init__(self, name):
         self.name = name
@@ -9,9 +15,20 @@ class CoolBox:
 
     # Creacion de la base de datos
     def databaseCreationOrConnection(self):
-        conn = sqlite3.connect(f"{self.name}.db")
-        cursor = conn.cursor()
-        return conn, cursor
+        if DEBUG_ORACLE == True:
+            # Credenciales de conexión
+            dsn = cx_Oracle.makedsn("host", "port", service_name="service_name")
+            username = "tu_usuario"
+            password = "tu_contraseña"
+
+            # Crear una conexión
+            conn = cx_Oracle.connect(username, password, dsn)            
+            cursor = conn.cursor()
+            return conn, cursor
+        else:
+            conn = sqlite3.connect(f"{self.name}.db")
+            cursor = conn.cursor()
+            return conn, cursor
 
     # creación de la entidad de relación categorias productos
     def creationOfTheProductCategoryRelationshipEntity(self):
